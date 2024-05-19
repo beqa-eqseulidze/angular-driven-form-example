@@ -1,0 +1,39 @@
+<!-- just input two way binding-->
+<p align="center">example for two way binding</p>
+<br>
+<input type="text" name="firstName" id="" [(ngModel)]="firstName" placeholder="firstName">
+<br><br>
+<p>firstName:  {{firstName}}</p>
+<br><br>
+<hr>
+<br><br>
+<!-- driven form example -->
+<p align="center">driven form example:</p>
+
+<form (ngSubmit)="submit(f)" #f="ngForm">
+    <div class="form-field">
+        <input type="text" name="firstName" id="firstname" placeholder="first name" ngModel required minlength="1">
+        <p *ngIf="f.controls['firstName'].invalid && f.controls['firstName'].touched"> firstName is required</p>
+    </div>        
+    
+    <div class="form-field">
+        <input type="text" name="lastName" id="lastname" placeholder="last name" ngModel required minlength="1">
+        <p *ngIf="f.controls['lastName'].invalid && f.controls['lastName'].touched"> lastName is required</p>
+    </div>
+    
+    <div ngModelGroup="contactInfo">
+        <p>contact info</p>    
+        <div class="form-field">
+            <input type="email" name="email" id="email" #email="ngModel" placeholder="email" ngModel required  email  >
+            <p *ngIf="email.invalid&&email.touched">email is required</p>     
+        </div>  
+        <div class="form-field">
+            <input type="tel" name="tel" id="tel" #tel="ngModel" placeholder="tel:" ngModel required minlength="9">
+            <p *ngIf="tel.invalid&&tel.touched">phone is required</p>
+        </div>  
+    </div>
+    <br>
+    <input type="submit" value="submit">
+</form>
+
+<div>{{form|json}}</div>
